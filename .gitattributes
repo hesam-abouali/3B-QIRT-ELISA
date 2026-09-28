@@ -1,0 +1,2 @@
+# Keep the raw instrument exports and the app's export byte-for-byte identical on every OS
+data/** -text

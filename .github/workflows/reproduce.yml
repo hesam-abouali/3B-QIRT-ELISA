@@ -1,0 +1,30 @@
+# GitHub runs every .yml file in .github/workflows/ as a "workflow".
+# This one runs the walkthrough notebook, which recomputes the peak areas of all 24 scans from the
+# raw files and stops with an error if any differs from the app's export,
+# data/processed/Fed_state_Rat1_app_output.csv. See the results in the Actions tab.
+
+name: Reproduce AUC table            # the name shown in the Actions tab and on the status badge
+
+on:                                  # WHEN it runs
+  push:                              #   every time commits are pushed to GitHub
+  pull_request:                      #   on every pull request
+  workflow_dispatch:                 #   on demand, with a "Run workflow" button in the Actions tab
+
+jobs:                                # WHAT runs: one or more jobs, each on its own fresh machine
+  reproduce:
+    runs-on: ubuntu-latest           # a clean Linux machine, created for this run and then deleted
+    steps:                           # run in order; if one fails, the run stops with a red cross
+      - name: Get the repository's files
+        uses: actions/checkout@v7    # "uses:" runs a ready-made action published on GitHub
+
+      - name: Install Python 3.13
+        uses: actions/setup-python@v7
+        with:                        # settings passed to that action
+          python-version: "3.13"
+          cache: pip                 # keep downloaded packages so later runs are faster
+
+      - name: Install the pinned packages, plus Jupyter's notebook runner
+        run: pip install -r requirements.txt nbclient==0.10.2 ipykernel==6.29.5   # "run:" executes a terminal command
+
+      - name: Run the walkthrough notebook
+        run: jupyter execute analysis/peak_analysis_walkthrough.ipynb    # fails if any cell stops with an error
