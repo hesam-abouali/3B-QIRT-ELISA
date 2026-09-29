@@ -27,16 +27,35 @@ streamlit run 3B-QIRT-ELISA-Peak-Analyzer.py
 
 Recordings of Digilent WaveForms software (CSV exports) can be uploaded on the Data tab.
 
-## Contents
+## Repository structure
 
 ```
-3B-QIRT-ELISA-Peak-Analyzer.py            Streamlit app, main app of the package
-requirements.txt                          package versions used (app and notebook)
-data/raw/fed_state_Rat1_raw_scans/        24 raw scans as exported by Digilent WaveForms (unmodified)
-data/processed/                           the app's exported results for the 24 scans (Download wide format CSV)
-analysis/pipeline.py                      the app's processing chain as plain functions (no interface)
-analysis/peak_analysis_walkthrough.ipynb  step-by-step walkthrough with plots; reproduces the app's export
+.
+├── 3B-QIRT-ELISA-Peak-Analyzer.py         # Streamlit app, main app of the package
+├── requirements.txt                       # Package versions used (app and notebook)
+├── analysis/
+│   ├── pipeline.py                        # The app's processing chain as plain functions
+│   └── peak_analysis_walkthrough.ipynb    # Step-by-step walkthrough; reproduces the app's export
+├── data/
+│   ├── README.md                          # File formats and column definitions
+│   ├── raw/
+│   │   └── fed_state_Rat1_raw_scans/      # 24 raw scans from Digilent WaveForms (unmodified)
+│   └── processed/
+│       └── Fed_state_Rat1_app_output.csv  # The app's export (Download wide format CSV)
+├── .github/workflows/reproduce.yml        # Runs the notebook on every push (GitHub Actions)
+├── LICENSE                                # MIT
+└── README.md
 ```
+
+## Dataset
+
+The repository includes one recording from the fed-state experiment as a worked example; the full
+cohort is described in the paper.
+
+| Experiment | Animal | Recording | Channels | Location |
+|---|---|---|---|---|
+| Fed state, 30 min | Rat 1 (healthy) | 24 consecutive scans, 56–69 s each, sampled at 215.6 Hz | QDot 565 (C-peptide), QDot 605 (glucagon), QDot 655 (insulin), all QDots | [`data/raw/fed_state_Rat1_raw_scans/`](data/raw/fed_state_Rat1_raw_scans) |
+| App output | Rat 1 | One row per scan | Peak count, outlier count and peak area per channel | [`data/processed/Fed_state_Rat1_app_output.csv`](data/processed/Fed_state_Rat1_app_output.csv) |
 
 File formats and column definitions are in [data/README.md](data/README.md).
 
