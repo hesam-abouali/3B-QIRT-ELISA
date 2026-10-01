@@ -3,6 +3,7 @@
 [![Paper](https://img.shields.io/badge/JOURNAL-2026-blue)](https://doi.org/...)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 ![Python 3.10–3.13](https://img.shields.io/badge/python-3.10--3.13-blue)
+[![Streamlit app](https://img.shields.io/badge/Streamlit-live%20app-FF4B4B?logo=streamlit&logoColor=white)](https://3b-qirt-elisa.streamlit.app)
 
 A Streamlit app that detects peaks and calculates their areas (AUC) in three-biomarker measurements of the QIRT-ELISA platform: 
 QDot 565 (C-peptide), QDot 605 (glucagon), and QDot 655 (insulin). 
@@ -11,11 +12,9 @@ Spurious outliers are identified and screened out with an adaptive Hampel (fold-
 This repository also contains the raw recordings of one experiment (fed-state Rat 1, 24 scans)
 and a notebook that recomputes the manuscript's per-scan peak areas from them (data that has been used for the two-point calibration of the concentration profile of Rat 1 in the fed-state experiment, and subsequent feature extraction from those concentration profiles).
 
-<!-- Live app: the Streamlit Community Cloud link here after deploying -->
-
 ## Run the app
 
-**Online:** open the live app and tick **Use example data** on the Data tab to load the 24 raw
+**Online:** open the [live app](https://3b-qirt-elisa.streamlit.app) and tick **Use example data** on the Data tab to load the 24 raw
 scans in `data/raw/fed_state_Rat1_raw_scans/`.
 
 **Locally:**
